@@ -8,16 +8,18 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 //var inlineCss = require('gulp-inline-css');
-var inline ) require('gulp-inline');
+var inline = require('gulp-inline');
+var cleanCSS = require('gulp-clean-css')
 
 // Lint Task
 gulp.task('lint', function() {
-    return gulp.src('js/*.js')
+    return gulp.src('views/js/*.js')
+//    return gulp.src('js/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
 
-// Compile Our Sass
+// Compile Sass
 //gulp.task('sass', function() {
 //    return gulp.src('scss/*.scss')
 //        .pipe(sass())
@@ -25,6 +27,24 @@ gulp.task('lint', function() {
 //});
 
 // Concatenate & Minify JS
+
+gulp.task('scripts', function() {
+    return gulp.src('views/js/*.js')
+        .pipe(concat('all.js'))
+        .pipe(gulp.dest('views/dist'))
+        .pipe(rename('all.min.js'))
+        .pipe(uglify().on('error', function(e) {
+        console.log(e);
+    }))
+        .pipe(gulp.dest('views/dist/js'));
+});
+
+gulp.task('minify-css', function() {
+  return gulp.src('views/css/*.css')
+    .pipe(cleanCSS({compatibility: 'ie8'}))
+    .pipe(gulp.dest('views/dist/css'));
+});
+
 gulp.task('scripts', function() {
     return gulp.src('js/*.js')
         .pipe(concat('all.js'))
@@ -32,6 +52,12 @@ gulp.task('scripts', function() {
         .pipe(rename('all.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('dist/js'));
+});
+
+gulp.task('minify-css', function() {
+  return gulp.src('css/*.css')
+    .pipe(cleanCSS({compatibility: 'ie8'}))
+    .pipe(gulp.dest('dist/css'));
 });
 
 //// inline css for emails
@@ -48,21 +74,32 @@ gulp.task('scripts', function() {
 
 //inline css, js, svg into html files
 
-gulp.src('public/index.html')
+gulp.src(['index.html','project-2048.html','project-mobile.html','project-webperf.html'])
   .pipe(inline({
-    base: 'public/',
+    //base: 'public/',
     js: uglify,
-    css: minifyCss,
-    disabledTypes: ['svg', 'img', 'js'], // Only inline css files
+    css: cleanCSS,
+    disabledTypes: ['svg', 'img'], // Only inline css and js files
 //    ignore: ['./css/do-not-inline-me.css']
   }))
   .pipe(gulp.dest('dist/'));
 
+gulp.src('views/pizza.html')
+  .pipe(inline({
+    //base: 'public/',
+    js: uglify,
+    css: cleanCSS,
+    disabledTypes: ['svg', 'img'], // Only inline css and js files
+//    ignore: ['./css/do-not-inline-me.css']
+  }))
+  .pipe(gulp.dest('views/dist/'));
+
 // Watch Files For Changes
 gulp.task('watch', function() {
     gulp.watch('js/*.js', ['lint', 'scripts']);
-    gulp.watch('scss/*.scss', ['sass']);
+    gulp.watch('views/js/*.js', ['lint', 'scripts']);
+   // gulp.watch('scss/*.scss', ['sass']);
 });
 
 // Default Task
-gulp.task('default', ['lint', 'sass', 'scripts', 'inline', 'watch']);
+gulp.task('default', ['lint', 'scripts', 'watch']); //sass inline
