@@ -7,7 +7,7 @@ var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
-//var inlineCss = require('gulp-inline-css');
+var inlineCss = require('gulp-inline-css');
 var inline = require('gulp-inline');
 var cleanCSS = require('gulp-clean-css')
 
@@ -62,17 +62,17 @@ gulp.task('lint', function() {
 //    .pipe(gulp.dest('dist/css'));
 //});
 
-//// inline css for emails
-//guld.task('inlineCss', function() {
-//   return gulp.src('./*.html')
-//    .pipe(inlineCss({
-//        applyStyleTags: true,
-//        applyLinkTags: true,
-//        removeStyleTags: true,
-//        removeLinkTags: true
-//   }))
-//   .pipe(gulp.dest('build/'));
-//});
+// inline css for emails
+gulp.task('inlineCss', function() {
+   return gulp.src('src/*.html')
+    .pipe(inlineCss({
+        applyStyleTags: true,
+        applyLinkTags: true,
+        removeStyleTags: true,
+        removeLinkTags: true
+   }))
+   .pipe(gulp.dest('dist/'));
+});
 
 //inline css, js, svg into html files
 
@@ -80,8 +80,8 @@ gulp.src(['src/index.html','src/project-2048.html','src/project-mobile.html','sr
   .pipe(inline({
     //base: 'public/',
     js: uglify,
-    css: cleanCSS,
-    disabledTypes: ['svg', 'img'], // Only inline css and js files
+    //css: cleanCSS,
+    //disabledTypes: ['svg', 'img'], // Only inline css and js files
 //    ignore: ['./css/do-not-inline-me.css']
   }))
   .pipe(gulp.dest('dist/'));
@@ -90,7 +90,7 @@ gulp.src('src/views/pizza.html')
   .pipe(inline({
     //base: 'public/',
     js: uglify,
-    css: cleanCSS,
+    //css: cleanCSS,
    // disabledTypes: ['svg', 'img'], // Only inline css and js files
 //    ignore: ['./css/do-not-inline-me.css']
   }))
