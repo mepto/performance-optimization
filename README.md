@@ -35,14 +35,14 @@ This github repo contains the following:
 ### Gulp tasks file
 
 In order to run the task file, you will need to:
-1. have [node.js](https://nodejs.org/en/) installed
-2. make sure you install the following npm packages used by gulp:
-    * [gulp](http://gulpjs.com/), obviously :)
-    * [jshint](https://github.com/jshint/jshint)
-    * [uglify](https://www.npmjs.com/package/gulp-uglify)
-    * [rename](https://www.npmjs.com/package/gulp-rename)
-    * [inline](https://www.npmjs.com/package/gulp-inline)
-    * [cleanCSS](https://www.npmjs.com/package/gulp-clean-css)
-    * [htmlclean](https://www.npmjs.com/package/gulp-htmlclean)
-3. launch gulp in your git shell to modify and start watching the files
-4. hit ctrl+C to stop the gulp task - you're done!
+1.have [node.js](https://nodejs.org/en/) installed
+2.make sure you install the following npm packages used by gulp:
+- [gulp](http://gulpjs.com/), obviously :)
+- [jshint](https://github.com/jshint/jshint)
+- [uglify](https://www.npmjs.com/package/gulp-uglify)
+- [rename](https://www.npmjs.com/package/gulp-rename)
+- [inline](https://www.npmjs.com/package/gulp-inline)
+- [cleanCSS](https://www.npmjs.com/package/gulp-clean-css)
+- [htmlclean](https://www.npmjs.com/package/gulp-htmlclean)
+3.launch gulp in your git shell to modify and start watching the files
+4.hit ctrl+C to stop the gulp task - you're done!
