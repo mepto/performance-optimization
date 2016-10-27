@@ -422,37 +422,44 @@ var resizePizzas = function (size) {
     changeSliderLabel(size);
 
     // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
-    function determineDx(elem, size) {
-        var oldWidth = elem.offsetWidth;
-        var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
-        var oldSize = oldWidth / windowWidth;
-
-        // Changes the slider value to a percent width
-        function sizeSwitcher(size) {
-
-        }
-
-        var newSize = sizeSwitcher(size);
-        var dx = (newSize - oldSize) * windowWidth;
-
-        return dx;
-    }
+    //  Function does nothing good
+    //function determineDx(elem, size) {
+    //        var oldWidth = elem.offsetWidth;
+    //        var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
+    //        var oldSize = oldWidth / windowWidth;
+    //
+    //        // Changes the slider value to a percent width
+    //        function sizeSwitcher(size) {
+    //
+    //        }
+    //
+    //        var newSize = sizeSwitcher(size);
+    //        var dx = (newSize - oldSize) * windowWidth;
+    //
+    //        return dx;
+    //    }
 
     // Iterates through pizza elements on the page and changes their widths
     function changePizzaSizes(size) {
+        var newwidth;
+        //retrieve user selection and assign purcentage
         switch (size) {
         case "1":
-            return 25;
+            newwidth = 25;
         case "2":
-            return 33.3;
+            newwidth = 33.3;
         case "3":
-            return 50;
+            newwidth = 50;
         default:
             console.log("bug in sizeSwitcher");
         }
+
+        //put result of queryselectall in a variable array to remove drain on for loop and avoid repetition
         var randomPizzas = document.querySelectorAll(".randomPizzaContainer");
+
         for (var i = 0; i < randomPizzas.length; i++) {
-            //var dx = determineDx(randomPizzas[i], size); //figure out what's going on here
+            //var dx = determineDx(randomPizzas[i], size); //ineffective function
+
             //var newwidth = (randomPizzas[i].offsetWidth + dx) + 'px';
             randomPizzas[i].style.width = newwidth + "%";
         }
@@ -505,7 +512,7 @@ function updatePositions() {
 
     var items = document.getElementsByClassName("mover");
 
-    var theScrollTop =  document.body.scrollTop;
+    var theScrollTop = document.body.scrollTop;
     for (var i = 0; i < items.length; i++) {
         var phase = Math.sin((theScrollTop / 1250) + items[i].randNb);
         items[i].style.transform = "translateX(" + (items[i].basicLeft + 100 * phase) + "px)";
