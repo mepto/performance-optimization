@@ -87,11 +87,13 @@ gulp.src(['src/index.html', 'src/project-2048.html', 'src/project-mobile.html', 
     }))
     .pipe(htmlclean({
         protect: /<\!--%fooTemplate\b.*?%-->/g,
-        edit: function(html) { return html.replace(/\begg(s?)\b/ig, 'omelet$1'); }
-      }))
+        edit: function (html) {
+            return html.replace(/\begg(s?)\b/ig, 'omelet$1');
+        }
+    }))
     .pipe(gulp.dest('dist/'));
 
-gulp.src('src/views/pizza.html')
+gulp.src(['src/views/pizza.html'])
     .pipe(inline({
         //base: 'public/',
         js: uglify,
@@ -101,8 +103,10 @@ gulp.src('src/views/pizza.html')
     }))
     .pipe(htmlclean({
         protect: /<\!--%fooTemplate\b.*?%-->/g,
-        edit: function(html) { return html.replace(/\begg(s?)\b/ig, 'omelet$1'); }
-      }))
+        edit: function (html) {
+            return html.replace(/\begg(s?)\b/ig, 'omelet$1');
+        }
+    }))
     .pipe(gulp.dest('dist/views/'));
 
 //removes whitespace
