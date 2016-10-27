@@ -3,7 +3,6 @@ var gulp = require('gulp');
 
 // Include Our Plugins
 var jshint = require('gulp-jshint');
-var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var inline = require('gulp-inline');
@@ -48,10 +47,10 @@ gulp.src(['src/views/pizza.html'])
 
 // Watch Files For Changes
 gulp.task('watch', function () {
-    gulp.watch('src/js/*.js', ['lint', 'scripts']);
-    gulp.watch('src/views/js/*.js', ['lint', 'scripts']);
-    gulp.watch('src/css/*.css', ['lint', 'minify-css']);
-    gulp.watch('src/views/css/*.css', ['lint', 'minify-css']);
+    gulp.watch('src/js/*.js', ['lint']);
+    gulp.watch('src/views/js/*.js', ['lint']);
+    gulp.watch('src/css/*.css', ['lint']);
+    gulp.watch('src/views/css/*.css', ['lint']);
 });
 
 // Default Task
