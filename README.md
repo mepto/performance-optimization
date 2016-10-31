@@ -48,6 +48,6 @@ In order to run the task file, you will need to:
 - [cleanCSS](https://www.npmjs.com/package/gulp-clean-css)
 - [htmlclean](https://www.npmjs.com/package/gulp-htmlclean)
 
-3. launch gulp in your git shell to modify and start watching the files
+3.launch gulp in your git shell to modify and start watching the files
 
 4.hit ctrl+C to stop the gulp task - you're done!
