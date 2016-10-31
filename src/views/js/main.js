@@ -459,7 +459,7 @@ var resizePizzas = function (size) {
 
         //put result of queryselectall in a variable array to remove drain on for loop and avoid repetition
         //getElementsBYClassName is faster than queryselectorall
-        var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
+        var randomPizzas = document.getElementsByClassName("randomPizzaContainer")[0];
 
         for (var i = 0; i < randomPizzas.length; i++) {
             //var dx = determineDx(randomPizzas[i], size); //ineffective function
@@ -543,10 +543,11 @@ window.addEventListener("scroll", updatePositions);
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener("DOMContentLoaded", function () {
-    var cols = 8;
+    var cols = 5;
     var s = 256;
-    var numberOfPizzas = document.height / s * cols;
-    for (var i = 0; i < numberOfPizzas; i++) {
+    //dynamically count nb of pizzas required
+    var nbPizzas = (window.innerHeight / s) * cols + (cols - ((window.innerHeight / s) * cols) % cols);
+    for (var i = 0; i < nbPizzas; i++) {
         var elem = document.createElement("img");
         elem.className = "mover";
         elem.src = "images/pizza.png";
@@ -554,8 +555,7 @@ document.addEventListener("DOMContentLoaded", function () {
         elem.style.width = "73.333px";
         elem.basicLeft = (i % cols) * s;
         elem.randNb = Math.floor(Math.random() * 5);
-        elem.style.top = (Math.floor(i / cols) * s) + "px";
-        document.querySelector("#movingPizzas1").appendChild(elem);
+        elem.style.top = (Math.floor(i / cols) * s) + "px"; document.getElementById("movingPizzas1").appendChild(elem);
     }
     updatePositions();
 });
