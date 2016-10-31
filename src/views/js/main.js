@@ -459,7 +459,7 @@ var resizePizzas = function (size) {
 
         //put result of queryselectall in a variable array to remove drain on for loop and avoid repetition
         //getElementsBYClassName is faster than queryselectorall
-        var randomPizzas = document.getElementsByClassName("randomPizzaContainer")[0];
+        var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
 
         for (var i = 0; i < randomPizzas.length; i++) {
             //var dx = determineDx(randomPizzas[i], size); //ineffective function
@@ -547,8 +547,9 @@ document.addEventListener("DOMContentLoaded", function () {
     var s = 256;
     //dynamically count nb of pizzas required
     var nbPizzas = (window.innerHeight / s) * cols + (cols - ((window.innerHeight / s) * cols) % cols);
+    var elem;
     for (var i = 0; i < nbPizzas; i++) {
-        var elem = document.createElement("img");
+        elem = document.createElement("img");
         elem.className = "mover";
         elem.src = "images/pizza.png";
         elem.style.height = "100px";
